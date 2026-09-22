@@ -1,0 +1,608 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郭乘宇的个人网站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f7fcff;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ========== 顶部导航栏：参考图通栏布局，头像放最左侧 ========== */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background-color: #ffffff;
+            box-shadow: 0 2px 12px rgba(56, 189, 248, 0.12);
+            border-bottom: 1px solid #e0f2fe;
+        }
+
+        .nav-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nav-avatar img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+        }
+
+        .nav-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #0369a1;
+        }
+
+        .nav-subtitle {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-menu a {
+            color: #475569;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 999px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background-color: #e0f2fe;
+            color: #0369a1;
+        }
+
+        /* ========== 首页Hero区域：参考图左右分栏排版 ========== */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            padding: 70px 0 50px;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 18px;
+        }
+
+        .hero-avatar img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #38bdf8;
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.25);
+        }
+
+        .hero-name {
+            font-size: 36px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .hero-job {
+            font-size: 16px;
+            color: #0369a1;
+            font-weight: 600;
+        }
+
+        .hero-desc {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.7;
+            max-width: 420px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 6px;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            border: 2px solid #38bdf8;
+            color: #0369a1;
+            background-color: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: #38bdf8;
+            color: #fff;
+        }
+
+        .hero-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.12);
+            border: 1px solid #e0f2fe;
+        }
+
+        .info-card-label {
+            font-size: 13px;
+            color: #0369a1;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .clock {
+            font-size: 44px;
+            font-weight: 700;
+            color: #0ea5e9;
+            font-family: "Courier New", monospace;
+            margin-bottom: 6px;
+        }
+
+        .clock-date {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        .quote-text {
+            font-size: 18px;
+            color: #0f172a;
+            font-weight: 700;
+            line-height: 1.6;
+            min-height: 30px;
+        }
+
+        .quote-source {
+            text-align: right;
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        /* ========== 通用板块标题 ========== */
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            color: #0f172a;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #38bdf8;
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* ========== 关于我 ========== */
+        #about {
+            margin: 60px 0;
+        }
+
+        #about p {
+            background-color: #ffffff;
+            padding: 28px;
+            border-radius: 20px;
+            color: #475569;
+            line-height: 1.8;
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.08);
+            border: 1px solid #e0f2fe;
+        }
+
+        /* ========== 技能栈 ========== */
+        #skills {
+            margin: 60px 0;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .skill-item {
+            background-color: #ffffff;
+            padding: 12px 22px;
+            border-radius: 999px;
+            color: #0369a1;
+            font-size: 15px;
+            border: 1px solid #e0f2fe;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background-color: #38bdf8;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* ========== 项目经历 ========== */
+        #projects {
+            margin: 60px 0;
+        }
+
+        .project-item {
+            background-color: #ffffff;
+            padding: 28px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e0f2fe;
+            box-shadow: 0 8px 24px rgba(56, 189, 248, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            border-color: #38bdf8;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.15);
+        }
+
+        .project-item h3 {
+            font-size: 20px;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .project-item h3 span {
+            font-size: 14px;
+            color: #64748b;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+
+        .project-item p {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin: 4px 6px 4px 0;
+        }
+
+        .expandBtn {
+            margin-top: 14px;
+            padding: 9px 20px;
+            background-color: #38bdf8;
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .expandBtn:hover {
+            background-color: #0ea5e9;
+        }
+
+        .project-detail {
+            display: none;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed #e0f2fe;
+            color: #334155;
+        }
+
+        .project-detail.open {
+            display: block;
+        }
+
+        /* ========== 联系方式 ========== */
+        #contact {
+            margin: 60px 0 80px;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .contact-item {
+            background-color: #ffffff;
+            padding: 14px 22px;
+            border-radius: 16px;
+            color: #0369a1;
+            text-decoration: none;
+            border: 1px solid #e0f2fe;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item:hover {
+            background-color: #38bdf8;
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* ========== 页脚 ========== */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #94a3b8;
+            border-top: 1px solid #e0f2fe;
+            background-color: #ffffff;
+        }
+
+        /* ========== 移动端适配 ========== */
+        @media (max-width: 900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-left {
+                align-items: center;
+            }
+
+            .nav-wrap {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-menu a {
+                margin: 0 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 顶部导航栏：头像在最左侧 -->
+<nav>
+    <div class="nav-wrap">
+        <div class="nav-left">
+            <div class="nav-avatar">
+                <img src="images/tx.jpg" alt="头像">
+            </div>
+            <div>
+                <div class="nav-title">郭乘宇</div>
+                <div class="nav-subtitle">后端开发工程师</div>
+            </div>
+        </div>
+        <div class="nav-menu">
+            <a href="#about">关于我</a>
+            <a href="#skills">技能栈</a>
+            <a href="#projects">项目经历</a>
+            <a href="#contact">联系我</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 首页Hero区域：参考图左右分栏 -->
+    <div class="hero">
+        <div class="hero-left">
+            <div class="hero-avatar">
+                <img src="images/tx.jpg" alt="个人头像">
+            </div>
+            <div class="hero-name">郭乘宇</div>
+            <div class="hero-job">后端开发 / 计算机应届生 / 终身学习者</div>
+            <p class="hero-desc">
+                计算机专业在校生/寻找后端开发 /AI agent 应用开发相关岗位,欢迎交流
+            
+            </p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">查看项目</a>
+                <a href="#contact" class="btn btn-outline">联系我</a>
+            </div>
+        </div>
+
+        <div class="hero-right">
+            <div class="info-card">
+                <div class="info-card-label">实时时间</div>
+                <div class="clock" id="clock">22:43:06</div>
+                <div class="clock-date" id="clockDate">2026年9月21日 星期一</div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-card-label">📜 自勉</div>
+                <div class="quote-text" id="quoteText">悟已往之不谏，知来者之可追</div>
+                <div class="quote-source">— 自勉</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 关于我 -->
+    <section id="about">
+        <h2 class="section-title">关于我</h2>
+        <p>
+            计算机专业在校生，主攻后端开发，熟练使用 Java、SpringBoot、MySQL，
+            寻找后端开发 /AI 应用开发相关岗位,欢迎交流
+        </p>
+    </section>
+
+    <!-- 技能栈 -->
+    <section id="skills">
+        <h2 class="section-title">技能栈</h2>
+        <div class="skill-list">
+            <div class="skill-item">Java</div>
+            <div class="skill-item">SpringBoot</div>
+            <div class="skill-item">MySQL</div>
+            <div class="skill-item">Vue</div>
+            <div class="skill-item">HTML/CSS/JS</div>
+            <div class="skill-item">Git/GitHub</div>
+        </div>
+    </section>
+
+    <!-- 项目经历 -->
+    <section id="projects">
+        <h2 class="section-title">项目经历</h2>
+
+        <div class="project-item">
+            <h3>家具城进销存管理系统 <span>SpringBoot + Vue + MySQL</span></h3>
+            <p>✅ 业务：采购、销售、库存一体化管理平台</p>
+            <button class="expandBtn">查看详情</button>
+            <div class="project-detail">
+                <p>✅ 负责：数据库建模，后端接口开发；数据库事务控制防超卖，库存预警，多条件查询</p>
+            </div>
+        </div>
+
+        <div class="project-item">
+            <h3>基于区块链的彩票公平开奖系统 <span>Java + MySQL</span></h3>
+            <p>✅ 业务：投注、开奖、兑奖可追溯原型系统</p>
+            <button class="expandBtn">查看详情</button>
+            <div class="project-detail">
+                <p>✅ 负责：哈希存证模拟，投注、开奖、兑奖校验逻辑开发，异常捕获处理</p>
+            </div>
+        </div>
+
+        <div class="project-item">
+            <h3>个人作品集网站 <span>HTML5 + CSS3 + JS</span></h3>
+            <p>✅ 业务：个人求职展示网站，适配PC/移动端</p>
+            <button class="expandBtn">查看详情</button>
+            <div class="project-detail">
+                <p>✅ 负责：前端页面开发，实时时钟、语录轮播、导航交互</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact">
+        <h2 class="section-title">联系方式</h2>
+        <div class="contact-list">
+            <a href="https://github.com/YuCheng-work" target="_blank" class="contact-item">
+                <span>🐱</span> YuCheng-work
+            </a>
+            <a href="mailto:2445123629@qq.com" class="contact-item">
+                <span>📧</span> 2445123629@qq.com
+            </a>
+            <a href="#" class="contact-item">
+                <span>💬</span> 13653612839
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 你的名字 | 个人作品集网站</p>
+    </footer>
+</div>
+
+<script>
+    // 项目展开收起
+    const btns = document.querySelectorAll(".expandBtn");
+    btns.forEach(btn => {
+        btn.onclick = function () {
+            const detail = this.nextElementSibling;
+            detail.classList.toggle("open");
+            this.innerText = detail.classList.contains("open") ? "收起详情" : "查看详情";
+        }
+    })
+
+    // 实时时钟
+    function updateClock() {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        const s = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+
+        const weekDays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        const week = weekDays[now.getDay()];
+        document.getElementById('clockDate').textContent = `${year}年${month}月${day}日 ${week}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // 自勉句子定时轮换
+    const quoteList = [
+        "悟已往之不谏，知来者之可追",
+        "道阻且长，行则将至",
+        " 知不可乎骤得，拖遗响于悲风"
+    ];
+
+    let quoteIndex = 0;
+    const quoteDom = document.getElementById("quoteText");
+
+    function changeQuote() {
+        quoteIndex = (quoteIndex + 1) % quoteList.length;
+        quoteDom.textContent = quoteList[quoteIndex];
+    }
+
+    setInterval(changeQuote, 5000);
+</script>
+
+</body>
+</html>
